@@ -1,0 +1,39 @@
+﻿services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '5000:8080'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      postgres:
+        condition: service_healthy
+  
+  
+  
+  postgres:
+    image: postgres:18.6
+
+    container_name: documentsystem
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: documentsystem
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    
+    volumes:
+      - ../containers/database:/var/lib/postgresql
+
+    ports:
+      - "5432:5432"
+    
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  
