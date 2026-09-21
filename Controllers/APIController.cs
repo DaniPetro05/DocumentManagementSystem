@@ -1,3 +1,4 @@
+using DocumentManagementSystem.DAL;
 using Microsoft.AspNetCore.Mvc;
 using DocumentManagementSystem.Models;
 namespace DocumentManagementSystem.Controllers;
@@ -6,17 +7,22 @@ namespace DocumentManagementSystem.Controllers;
 [ApiController]
 public class APIController : ControllerBase
 {
-    //Dummy object for validity
-    static private Document _document = new Document
+    private readonly AppDbContext _appDbContext;
+    public APIController(AppDbContext appDbContext)
     {
-        Id = 1,
-        Title = "Document Title",
-        Format = "Document Format"
-    };
+        _appDbContext = appDbContext;
+    }
+    [HttpPost]
+    public IActionResult CreateDocument([FromBody] Document document)
+    {
+        _appDbContext.Documents.Add(document);
+        _appDbContext.SaveChanges();
+        return CreatedAtAction(nameof(CreateDocument), new { id = document.Id }, document);
+    }
 
     [HttpGet]
     public IActionResult GetDocument()
     {
-        return Ok(_document);
+        return Ok(_appDbContext.Documents.ToList());
     }
 }

@@ -1,8 +1,8 @@
 namespace DocumentManagementSystem;
-using DocumentManagementSystem.DAL;
-using Swashbuckle.AspNetCore.Swagger;
+using DAL;
 using Microsoft.EntityFrameworkCore;
-using DocumentManagementSystem.Endpoints;
+using Endpoints;
+using Extensions;
 
 public class Program
 {
@@ -12,6 +12,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
+        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
         
         
         var app = builder.Build();
@@ -24,6 +25,7 @@ public class Program
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "DocumentManagementSystem.API v1");
         });
+        MigrationExtension.MigrationApplication(app);
         app.MapDocumentEndpoints();
         app.MapControllers();
         app.Run();
