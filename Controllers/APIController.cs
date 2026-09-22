@@ -25,4 +25,6 @@ public class APIController : ControllerBase
     {
         return Ok(_appDbContext.Documents.ToList());
     }
+    
+    //TODO: Bring the endpoints to the Endpoints file 
 }
