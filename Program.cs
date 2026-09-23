@@ -1,7 +1,6 @@
 namespace DocumentManagementSystem;
 using DAL;
 using Microsoft.EntityFrameworkCore;
-using Endpoints;
 using Extensions;
 
 public class Program
@@ -26,7 +25,6 @@ public class Program
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "DocumentManagementSystem.API v1");
         });
         MigrationExtension.MigrationApplication(app);
-        app.MapDocumentEndpoints();
         app.MapControllers();
         app.Run();
     }

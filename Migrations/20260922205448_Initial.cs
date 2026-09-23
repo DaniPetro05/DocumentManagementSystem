@@ -20,12 +20,15 @@ namespace DocumentManagementSystem.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Format = table.Column<string>(type: "text", nullable: false)
                 },
-
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documents", x => x.Id);
                 });
+            //Adds created time metadata (WHEN MIGRATION DELETED, DISAPPEARS!!)3
+            migrationBuilder.Sql(
+                "ALTER TABLE \"Documents\" ADD COLUMN created_at TIMESTAMPTZ NOT NULL DEFAULT now()");
         }
+
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
