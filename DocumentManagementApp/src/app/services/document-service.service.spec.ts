@@ -16,6 +16,7 @@ describe('DocumentServiceService', () => {
     expect(service).toBeTruthy();
   });
 
+  //WIP
   it('should subscribe to content', () => {
     expect(service.isResolved == true);
   })
