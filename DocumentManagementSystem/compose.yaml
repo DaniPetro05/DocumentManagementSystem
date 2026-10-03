@@ -1,0 +1,62 @@
+﻿include: 
+  - ../DocumentManagementApp/compose.yaml
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - '5000:8080'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      postgres:
+        condition: service_healthy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - paperless
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    ports:
+      - "8000:8000"
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_SECRET_KEY: example123
+      PAPERLESS_DBUSER: postgres
+      PAPERLESS_DBPASS: root
+    depends_on:
+      - postgres
+      - paperless-broker
+  
+  
+  postgres:
+    image: postgres:18.6
+
+    container_name: documentsystem
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: documentsystem
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    
+    volumes:
+      - ../containers/database:/var/lib/postgresql
+
+    ports:
+      - "5432:5432"
+    
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+  paperless-broker:
+    image: redis:alpine
+  

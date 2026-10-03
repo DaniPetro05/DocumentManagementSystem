@@ -1,0 +1,32 @@
+0000000000000000000000000000000000000000 fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789989703 +0200	commit (initial): Document management system first part done
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789989818 +0200	checkout: moving from main to Prototype
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789989981 +0200	checkout: moving from Prototype to main
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789990004 +0200	checkout: moving from main to Prototype
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789990019 +0200	checkout: moving from Prototype to main
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006116 +0200	commit: Database queries added; ORM via EF implemented; QoL changes done in the form of modularity
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790006142 +0200	checkout: moving from main to Prototype
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790006354 +0200	checkout: moving from Prototype to Prototype
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 70fa8d8117fd8a930c0de426314dd83a97724546 Daniel Petrovic <muumipoika05@gmail.com> 1790006371 +0200	commit: Unversioned change committed
+70fa8d8117fd8a930c0de426314dd83a97724546 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006448 +0200	checkout: moving from Prototype to 6b13d30
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006456 +0200	checkout: moving from 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a to main
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006549 +0200	reset: moving to 6b13d30
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a 70fa8d8117fd8a930c0de426314dd83a97724546 Daniel Petrovic <muumipoika05@gmail.com> 1790006575 +0200	checkout: moving from main to Prototype
+70fa8d8117fd8a930c0de426314dd83a97724546 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006596 +0200	checkout: moving from Prototype to main
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006612 +0200	reset: moving to 6b13d3
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790007274 +0200	checkout: moving from main to main
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790007318 +0200	reset: moving to HEAD~1
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 70fa8d8117fd8a930c0de426314dd83a97724546 Daniel Petrovic <muumipoika05@gmail.com> 1790007422 +0200	checkout: moving from main to Prototype
+70fa8d8117fd8a930c0de426314dd83a97724546 70fa8d8117fd8a930c0de426314dd83a97724546 Daniel Petrovic <muumipoika05@gmail.com> 1790007479 +0200	reset: moving to HEAD
+70fa8d8117fd8a930c0de426314dd83a97724546 70fa8d8117fd8a930c0de426314dd83a97724546 Daniel Petrovic <muumipoika05@gmail.com> 1790007650 +0200	checkout: moving from Prototype to Prototype
+70fa8d8117fd8a930c0de426314dd83a97724546 3f3169c400609685e46f00e770a576797de14c96 Daniel Petrovic <muumipoika05@gmail.com> 1790007688 +0200	commit: Features reimplemented
+3f3169c400609685e46f00e770a576797de14c96 039902e37766ba3e1917dc24a311b909425a11c0 Daniel Petrovic <muumipoika05@gmail.com> 1790007847 +0200	commit: Lost files restored
+039902e37766ba3e1917dc24a311b909425a11c0 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790089891 +0200	commit: TODO optional
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790089900 +0200	checkout: moving from Prototype to main
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790083017 +0200	checkout: moving from main to Prototype
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790083049 +0200	checkout: moving from Prototype to main
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790083147 +0200	checkout: moving from main to main
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790083157 +0200	merge Prototype: Fast-forward
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790083197 +0200	checkout: moving from main to Prototype
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790083230 +0200	checkout: moving from Prototype to main
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a b35472918bf436831e0bd5bb1b6562f4c81c2f0a Daniel Petrovic <muumipoika05@gmail.com> 1790083274 +0200	pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+b35472918bf436831e0bd5bb1b6562f4c81c2f0a ab8ec47ff6bbda255a8dde34b4e47c6da35111ef Daniel Petrovic <muumipoika05@gmail.com> 1790155718 +0200	commit: Removed endpoints due to controller; extra addition to migration for created time of document

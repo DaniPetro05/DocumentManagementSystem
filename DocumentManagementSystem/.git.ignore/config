@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[pull]
+	rebase = false
+[remote "origin"]
+	url = git@github.com:DaniPetro05/DocumentManagementSystem.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

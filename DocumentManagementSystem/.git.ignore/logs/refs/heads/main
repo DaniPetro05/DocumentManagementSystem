@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1789989703 +0200	commit (initial): Document management system first part done
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 6b13d3087bcebccc3f61d2df9c16e1f99a52e72a Daniel Petrovic <muumipoika05@gmail.com> 1790006116 +0200	commit: Database queries added; ORM via EF implemented; QoL changes done in the form of modularity
+6b13d3087bcebccc3f61d2df9c16e1f99a52e72a fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad Daniel Petrovic <muumipoika05@gmail.com> 1790007318 +0200	reset: moving to HEAD~1
+fac3cdbc8d0583f2fefd209d05b06f1d474fc4ad 17f625041cfd4b4570f39a7fee2da616f6bbdb0a Daniel Petrovic <muumipoika05@gmail.com> 1790083157 +0200	merge Prototype: Fast-forward
+17f625041cfd4b4570f39a7fee2da616f6bbdb0a b35472918bf436831e0bd5bb1b6562f4c81c2f0a Daniel Petrovic <muumipoika05@gmail.com> 1790083274 +0200	pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+b35472918bf436831e0bd5bb1b6562f4c81c2f0a ab8ec47ff6bbda255a8dde34b4e47c6da35111ef Daniel Petrovic <muumipoika05@gmail.com> 1790155718 +0200	commit: Removed endpoints due to controller; extra addition to migration for created time of document
