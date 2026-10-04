@@ -5,11 +5,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DocumentServiceService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+  url : string = environment.ApiUrl + '/documentmanagement';
   isResolved : boolean = false;
   subscribeContent() {
-    this.http.get(environment.ApiUrl).subscribe({
+    console.log("Is executed!");
+    this.http.get(this.url).subscribe({
       next: resolve => {
         console.log(resolve);
         this.isResolved = true;

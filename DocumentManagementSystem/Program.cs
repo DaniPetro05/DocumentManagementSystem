@@ -15,6 +15,7 @@ public class Program
         
         
         var app = builder.Build();
+        app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         app.UseRouting();
         
         app.UseAuthentication();
