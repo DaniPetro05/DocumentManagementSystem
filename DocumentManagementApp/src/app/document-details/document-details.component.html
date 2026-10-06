@@ -1,4 +1,4 @@
-<ul>
+<!--<ul>
   @for (docs of DocumentService.list; track docs.id) {
     <li>
       {{ docs.id }}
@@ -6,4 +6,100 @@
       {{ docs.title }}
     </li>
   }
-</ul>
+</ul>-->
+
+<div class="dashboard">
+
+  <h2>Dashboard</h2>
+
+  <section class="create-document">
+    <h3>Create Document</h3>
+
+    <form (ngSubmit)="createDocument()">
+
+      <label for="title">Title</label>
+
+      <input
+        id="title"
+        name="title"
+        type="text"
+        [(ngModel)]="newDocument.title"
+        placeholder="Enter document title"
+      />
+
+      <label for="format">Format</label>
+
+      <input
+        id="format"
+        name="format"
+        type="text"
+        [(ngModel)]="newDocument.format"
+        placeholder="e.g. PDF, TXT, DOCX"
+      />
+
+      <button type="submit">
+        Create Document
+      </button>
+
+    </form>
+
+    @if (message) {
+      <p class="success">{{ message }}</p>
+    }
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+
+  </section>
+
+
+  <section class="documents">
+
+    <h3>Documents</h3>
+
+    @if (DocumentService.isResolved) {
+
+      @if (DocumentService.list.length > 0) {
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Format</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (doc of DocumentService.list; track doc.id) {
+
+              <tr>
+                <td>{{ doc.id }}</td>
+                <td>{{ doc.title }}</td>
+                <td>{{ doc.format }}</td>
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      } @else {
+
+        <p>No documents found.</p>
+
+      }
+
+    } @else {
+
+      <p>Loading documents...</p>
+
+    }
+
+  </section>
+
+</div>
