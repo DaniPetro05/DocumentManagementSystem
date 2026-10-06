@@ -24,6 +24,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: http://localhost:8080
       PAPERLESS_REDIS: redis://paperless-broker:6379
       PAPERLESS_SECRET_KEY: example123
       PAPERLESS_DBUSER: postgres

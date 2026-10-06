@@ -8,6 +8,16 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        //For later
+        /*builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("SecurePolicy", policy =>
+            {
+                policy.WithOrigins("http://localhost:8080", "http://localhost:4200")
+                    .WithMethods("GET", "POST")        // Only required methods
+                    .AllowAnyHeader(); // Only necessary headers
+            });
+        });*/
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
@@ -15,7 +25,7 @@ public class Program
         
         
         var app = builder.Build();
-        app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+        app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
         app.UseRouting();
         
         app.UseAuthentication();

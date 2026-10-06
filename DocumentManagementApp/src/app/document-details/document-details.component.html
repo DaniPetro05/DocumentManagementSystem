@@ -1,1 +1,9 @@
-<p>document-details works!</p>
+<ul>
+  @for (docs of DocumentService.list; track docs.id) {
+    <li>
+      {{ docs.id }}
+      {{ docs.format }}
+      {{ docs.title }}
+    </li>
+  }
+</ul>
