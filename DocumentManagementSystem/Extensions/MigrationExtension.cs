@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DocumentManagementSystem.Extensions;
 using DocumentManagementSystem.DAL;
 
+
 public static class MigrationExtension
 {
     public static void MigrationApplication(IApplicationBuilder builder)

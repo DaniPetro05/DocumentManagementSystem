@@ -2,10 +2,11 @@ namespace DocumentManagementSystem;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Extensions;
+using DocumentManagementSystem.Services;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         //For later
@@ -37,6 +38,7 @@ public class Program
         });
         MigrationExtension.MigrationApplication(app);
         app.MapControllers();
+        await RabbitMq.CreateEnvironment();
         app.Run();
     }
 }
