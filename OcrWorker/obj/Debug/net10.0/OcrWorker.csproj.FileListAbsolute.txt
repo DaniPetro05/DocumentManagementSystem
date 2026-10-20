@@ -1,0 +1,6 @@
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.csproj.AssemblyReference.cache
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.AssemblyInfoInputs.cache
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.AssemblyInfo.cs
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.csproj.CoreCompileInputs.cache
+C:\Users\Usman\Desktop\Dateien\FH Technikum\Software Engineering 3\Projekt\DocumentManagementSystem\OcrWorker\obj\Debug\net10.0\OcrWorker.sourcelink.json

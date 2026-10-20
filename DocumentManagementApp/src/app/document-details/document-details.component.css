@@ -81,3 +81,45 @@ th {
   color: #dc3545;
   font-weight: bold;
 }
+
+/* Layout for the document action buttons */
+.actions {
+  white-space: nowrap;
+}
+
+.actions button {
+  margin: 4px;
+  padding: 8px 12px;
+}
+
+/* Optional: distinguish destructive actions */
+.actions button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.actions button:nth-child(2):hover {
+  background-color: #b02a37;
+}
+
+/* Keep the disabled upload field visually distinct */
+input:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Supporting text below the upload field */
+.hint {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Make the table usable on smaller screens */
+.documents {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 600px;
+}

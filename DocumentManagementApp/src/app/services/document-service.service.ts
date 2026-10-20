@@ -49,4 +49,12 @@ export class DocumentServiceService {
 
     return this.http.post<Document>(this.url, document);
   }
+
+  updateDocument(document: Document) {
+    return this.http.put<void>(`${this.url}/${document.id}`, document);
+  }
+
+  deleteDocument(id: number) {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
 }

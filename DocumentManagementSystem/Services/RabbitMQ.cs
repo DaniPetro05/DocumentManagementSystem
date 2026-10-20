@@ -1,7 +1,10 @@
-namespace DocumentManagementSystem.Services;
-using System.Text;
 using RabbitMQ.AMQP.Client;
 using RabbitMQ.AMQP.Client.Impl;
+using System.Text;
+using System.Text.Json;
+using DocumentManagementSystem.Exceptions;
+
+namespace DocumentManagementSystem.Services;
 
 public class RabbitMq
 {

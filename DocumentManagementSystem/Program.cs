@@ -24,8 +24,11 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
         
+        //RabbitMQ publisher (singleton - one connection for the app's lifetime)
+        builder.Services.AddSingleton<RabbitMqPublisher>();
         
         var app = builder.Build();
+        
         app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
         app.UseRouting();
         
@@ -38,7 +41,8 @@ public class Program
         });
         MigrationExtension.MigrationApplication(app);
         app.MapControllers();
-        await RabbitMq.CreateEnvironment();
+        //await RabbitMq.CreateEnvironment();
+
         app.Run();
     }
 }

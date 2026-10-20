@@ -24,9 +24,6 @@ namespace DocumentManagementSystem.Migrations
                 {
                     table.PrimaryKey("PK_Documents", x => x.Id);
                 });
-            //Adds created time metadata (WHEN MIGRATION DELETED, DISAPPEARS!!)
-            migrationBuilder.Sql(
-                "ALTER TABLE \"Documents\" ADD COLUMN created_at TIMESTAMPTZ NOT NULL DEFAULT now()");
         }
 
         /// <inheritdoc />

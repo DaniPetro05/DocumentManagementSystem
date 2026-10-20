@@ -13,7 +13,8 @@
   <h2>Dashboard</h2>
 
   <section class="create-document">
-    <h3>Create Document</h3>
+    <!--<h3>Create Document</h3>-->
+    <h3>{{ editingDocumentId !== null ? 'Edit Document' : 'Create Document' }}</h3>
 
     <form (ngSubmit)="createDocument()">
 
@@ -25,9 +26,10 @@
         type="text"
         [(ngModel)]="newDocument.title"
         placeholder="Enter document title"
+        required
       />
 
-      <label for="format">Format</label>
+      <!--<label for="format">Format</label>
 
       <input
         id="format"
@@ -35,11 +37,46 @@
         type="text"
         [(ngModel)]="newDocument.format"
         placeholder="e.g. PDF, TXT, DOCX"
-      />
+      />-->
 
-      <button type="submit">
+      @if (editingDocumentId === null) {
+        <label for="format">Format</label>
+
+        <input
+          id="format"
+          name="format"
+          type="text"
+          [(ngModel)]="newDocument.format"
+          placeholder="e.g. PDF, TXT, DOCX"
+          required
+        />
+
+        <label for="file">Document upload (Sprint 4)</label>
+
+        <input
+          id="file"
+          name="file"
+          type="file"
+          disabled
+        />
+
+        <p class="hint">
+          File uploads will be enabled when storage integration is implemented.
+        </p>
+      }
+
+      <!--<button type="submit">
         Create Document
+      </button>-->
+      <button type="submit">
+        {{ editingDocumentId !== null ? 'Save Changes' : 'Create Document' }}
       </button>
+
+      @if (editingDocumentId !== null) {
+        <button type="button" (click)="cancelEdit()">
+          Cancel
+        </button>
+      }
 
     </form>
 
@@ -69,6 +106,7 @@
               <th>ID</th>
               <th>Title</th>
               <th>Format</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -80,6 +118,28 @@
                 <td>{{ doc.id }}</td>
                 <td>{{ doc.title }}</td>
                 <td>{{ doc.format }}</td>
+                <td class="actions">
+                  <button
+                    type="button"
+                    (click)="editDocument(doc)"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    (click)="deleteDocument(doc)"
+                  >
+                    Delete
+                  </button>
+
+                  <button
+                    type="button"
+                    (click)="convertDocument(doc)"
+                  >
+                    Convert
+                  </button>
+                </td>
               </tr>
 
             }
