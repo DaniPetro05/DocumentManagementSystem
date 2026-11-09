@@ -15,5 +15,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ghostscript \
     && rm -rf /var/lib/apt/lists/*
 
+# install System.Drawing native dependencies
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /app/x64 \
+ && ln -s /usr/lib/x86_64-linux-gnu/liblept.so.5      /app/x64/libleptonica-1.82.0.so \
+ && ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5 /app/x64/libtesseract50.so \
+ && ln -s /usr/lib/x86_64-linux-gnu/libdl.so.2 /usr/lib/x86_64-linux-gnu/libdl.so
+
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "OcrWorker.dll"]

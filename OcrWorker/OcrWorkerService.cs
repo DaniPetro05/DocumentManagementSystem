@@ -32,7 +32,9 @@ public class OcrWorkerService : BackgroundService
             .WithEndpoint(config["MINIO_ENDPOINT"] ?? "minio:9000")
             .WithCredentials(
                 config["MINIO_ACCESS_KEY"] ?? "minioadmin",
-                config["MINIO_SECRET_KEY"] ?? "minioadmin");
+                config["MINIO_SECRET_KEY"] ?? "minioadmin")
+            .WithSSL(false)
+            .Build();
 
         //Tesseract: Zeige Richtung "tessdata" Ordner (language files)
         var tessDataPath = config["TESSDATA_PREFIX"] ?? "/usr/share/tesseract-ocr/5/tessdata";
@@ -54,8 +56,10 @@ public class OcrWorkerService : BackgroundService
         _connection = await factory.CreateConnectionAsync();
         _channel = await _connection.CreateChannelAsync();
 
-        await _channel.QueueDeclareAsync(QueueName, durable: true, exclusive: false, autoDelete: false);
-        await _channel.QueueDeclareAsync(IndexQueueName, durable: true, exclusive: false, autoDelete: false);
+        var quorumArgs = new Dictionary<string, object?> { ["x-queue-type"] = "quorum" };
+
+        await _channel.QueueDeclareAsync(QueueName, durable: true, exclusive: false, autoDelete: false, arguments: quorumArgs);
+        await _channel.QueueDeclareAsync(IndexQueueName, durable: true, exclusive: false, autoDelete: false, arguments: quorumArgs);
         await _channel.BasicQosAsync(0, 1, false);
 
         _logger.LogInformation("OCR Worker started. Listening on '{Queue}'.", QueueName);

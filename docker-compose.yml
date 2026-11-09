@@ -29,6 +29,12 @@ services:
       RABBITMQ_DEFAULT_PASS: secure_password
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+        test: rabbitmq-diagnostics -q ping
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 10s
 
   minio:
     image: cgr.dev/chainguard/minio:latest
@@ -99,30 +105,30 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_USER=admin
       - RABBITMQ_PASS=secure_password
-      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_ENDPOINT=minio:9000
       - MINIO_ACCESS_KEY=minioadmin
       - MINIO_SECRET_KEY=minioadmin
       - TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata
     depends_on:
       rabbitmq:
-        condition: service_started
+        condition: service_healthy
       minio:
         condition: service_healthy
 
-  indexing-worker:
-    build:
-      context: .
-      dockerfile: IndexingWorker/Dockerfile
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_USER=admin
-      - RABBITMQ_PASS=secure_password
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    depends_on:
-      rabbitmq:
-        condition: service_started
-      elasticsearch:
-        condition: service_started
+  #indexing-worker:
+   # build:
+    #  context: .
+     # dockerfile: IndexingWorker/Dockerfile
+    #environment:
+     # - RABBITMQ_HOST=rabbitmq
+     # - RABBITMQ_USER=admin
+     # - RABBITMQ_PASS=secure_password
+     # - ELASTICSEARCH_URL=http://elasticsearch:9200
+    #depends_on:
+     # rabbitmq:
+      #  condition: service_healthy
+     # elasticsearch:
+      #  condition: service_started
 
   frontend:
     build:
@@ -141,30 +147,30 @@ services:
     volumes:
       - ./DocumentManagementSystem/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - paperless
+     - frontend
 
-  paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.3
-    ports:
-      - "8000:8000"
-    environment:
-      PAPERLESS_CSRF_TRUSTED_ORIGINS: http://localhost:8080
-      PAPERLESS_REDIS: redis://paperless-broker:6379
-      PAPERLESS_SECRET_KEY: example123
-      PAPERLESS_DBUSER: postgres
-      PAPERLESS_DBPASS: root
-    volumes:
-      - paperless_data:/usr/src/paperless
-    depends_on:
-      - postgres
-      - paperless-broker
+  #paperless:
+   # image: ghcr.io/paperless-ngx/paperless-ngx:3.3.3
+    #ports:
+     # - "8000:8000"
+    #environment:
+     # PAPERLESS_CSRF_TRUSTED_ORIGINS: http://localhost:8080
+      #PAPERLESS_REDIS: redis://paperless-broker:6379
+      #PAPERLESS_SECRET_KEY: example123
+      #PAPERLESS_DBUSER: postgres
+      #PAPERLESS_DBPASS: root
+    #volumes:
+     # - paperless_data:/usr/src/paperless
+    #depends_on:
+     # - postgres
+      #- paperless-broker
 
-  paperless-broker:
-    image: redis:alpine
+  #paperless-broker:
+   # image: redis:alpine
 
 volumes:
   postgres_data:
-  paperless_data:
+  #paperless_data:
   rabbitmq_data:
   minio_data:
   es_data:

@@ -14,8 +14,9 @@ public class MinioService
             .WithEndpoint(config["MINIO_ENDPOINT"] ?? "minio:9000")
             .WithCredentials(
                 config["MINIO_ACCESS_KEY"] ?? "minioadmin",
-                config["MINIO_SECRET_KEY"] ?? "minioadmin");
-
+                config["MINIO_SECRET_KEY"] ?? "minioadmin")
+            .WithSSL(false)
+            .Build();
         EnsureBucketExistsAsync().GetAwaiter().GetResult();
     }
 
