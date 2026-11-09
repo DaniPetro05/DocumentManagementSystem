@@ -13,12 +13,14 @@ public class APIController : ControllerBase
 {
     private readonly AppDbContext _appDbContext;
     private readonly RabbitMqPublisher _publisher;
+    private readonly MinioService _minioService;
     private readonly ILogger<APIController> _logger;
 
-    public APIController(AppDbContext appDbContext, RabbitMqPublisher publisher, ILogger<APIController> logger)
+    public APIController(AppDbContext appDbContext, RabbitMqPublisher publisher, MinioService minioService, ILogger<APIController> logger)
     {
         _appDbContext = appDbContext;
         _publisher = publisher;
+        _minioService = minioService;
         _logger = logger;
     }
 
@@ -31,7 +33,7 @@ public class APIController : ControllerBase
         return CreatedAtAction(nameof(GetDocumentById), new { id = document.Id }, document);
     }*/
 
-    [HttpPost]
+    /*[HttpPost]
     public async Task<ActionResult<Document>> CreateDocument([FromBody] Document document)
     {
         _appDbContext.Documents.Add(document);
@@ -41,8 +43,50 @@ public class APIController : ControllerBase
         {
             DocumentId = document.Id,
             Title = document.Title,
-            Format = document.Format
+            Format = document.Format,
+            Action = DocumentAction.Created
         };
+        
+        await _publisher.PublishDocumentAsync(message);
+
+        return CreatedAtAction(nameof(GetDocumentById), new { id = document.Id }, document);
+    }*/
+
+    [HttpPost]
+    [RequestFormLimits(MultipartBodyLengthLimit = 50 * 1024 * 1024)]   //50 MB ist das Limit
+    public async Task<ActionResult<Document>> CreateDocument(
+        [FromForm] string title,
+        [FromForm] string format,
+        [FromForm] IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(new { error = "No file uploaded." });
+
+        var document = new Document
+        {
+            Title = title,
+            Format = format,
+            MinioObjectPath = ""    //wird nach Upload gespeichert
+        };
+
+        _appDbContext.Documents.Add(document);
+        await _appDbContext.SaveChangesAsync();
+
+        //PDF wird zu MinIO geuploadet
+        using var stream = file.OpenReadStream();
+        document.MinioObjectPath = await _minioService.UploadPdfAsync(document.Id, title, stream);
+        await _appDbContext.SaveChangesAsync();
+
+        //Publishe zu Queue
+        var message = new DocumentMessage
+        {
+            DocumentId = document.Id,
+            Title = title,
+            Format = format,
+            MinioObjectPath = document.MinioObjectPath,
+            Action = DocumentAction.Created
+        };
+
         await _publisher.PublishDocumentAsync(message);
 
         return CreatedAtAction(nameof(GetDocumentById), new { id = document.Id }, document);
@@ -104,6 +148,14 @@ public class APIController : ControllerBase
         try
         {
             await _appDbContext.SaveChangesAsync();
+
+            /*await _publisher.PublishDocumentAsync(new DocumentMessage
+            {
+                DocumentId = document.Id,
+                Title = document.Title,
+                Format = document.Format,
+                Action = DocumentAction.Updated
+            });*/
         }
         catch (DbUpdateException ex)
         {
@@ -125,6 +177,14 @@ public class APIController : ControllerBase
 
         _appDbContext.Documents.Remove(document);
         await _appDbContext.SaveChangesAsync();
+
+        /*await _publisher.PublishDocumentAsync(new DocumentMessage
+        {
+            DocumentId = document.Id,
+            Title = document.Title,
+            Format = document.Format,
+            Action = DocumentAction.Deleted
+        });*/
 
         return NoContent();
     }

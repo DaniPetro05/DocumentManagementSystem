@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OcrWorker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a4e208ad22886291b58948ffca3d55013b747cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc92d1e7c610944f44e8d9343df1c512c9be306e")]
 [assembly: System.Reflection.AssemblyProductAttribute("OcrWorker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OcrWorker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

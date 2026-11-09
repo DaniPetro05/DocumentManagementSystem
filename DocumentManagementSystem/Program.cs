@@ -19,6 +19,7 @@ public class Program
                     .AllowAnyHeader(); // Only necessary headers
             });
         });*/
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
@@ -26,6 +27,8 @@ public class Program
         
         //RabbitMQ publisher (singleton - one connection for the app's lifetime)
         builder.Services.AddSingleton<RabbitMqPublisher>();
+        
+        builder.Services.AddSingleton<MinioService>();
         
         var app = builder.Build();
         

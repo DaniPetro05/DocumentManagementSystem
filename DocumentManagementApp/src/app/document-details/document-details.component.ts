@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DocumentServiceService } from '../services/document-service.service';
-import { Observable } from 'rxjs';
 import { Document } from '../document.model';
-import { HttpClient } from '@angular/common/http';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-document-details',
@@ -20,6 +17,9 @@ export class DocumentDetailsComponent implements OnInit {
     format: ''
   };
 
+  selectedFile: File | null = null;
+  inferredFormat: string = '';
+
   editingDocumentId: number | null = null;
 
   message: string = '';
@@ -30,6 +30,23 @@ export class DocumentDetailsComponent implements OnInit {
   ngOnInit(): void {
     console.log('DocumentDetailsComponent initialized');
     this.DocumentService.subscribeContent();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.inferredFormat = this.inferFormat(this.selectedFile);
+    } else {
+      this.selectedFile = null;
+      this.inferredFormat = '';
+    }
+  }
+
+  private inferFormat(file: File): string {
+    //Benutzt die Dateiendung im Uppercase
+    const ext = file.name.split('.').pop()?.toUpperCase() ?? '';
+    return ext;
   }
 
   /*createDocument(): void {
@@ -82,16 +99,37 @@ export class DocumentDetailsComponent implements OnInit {
       return;
     }
 
-    if (!this.newDocument.format.trim()) {
+    /*if (!this.newDocument.format.trim()) {
       this.errorMessage = 'Please enter a document format.';
       return;
-    }
+    }*/
 
-    this.DocumentService.createDocument(this.newDocument).subscribe({
+    /*this.DocumentService.createDocument(this.newDocument).subscribe({
       next: createdDocument => {
         this.message = 'Document created successfully!';
         this.DocumentService.list.push(createdDocument);
         this.newDocument = { id: 0, title: '', format: '' };
+      },
+      error: err => {
+        console.error('Error creating document:', err);
+        this.errorMessage = 'Could not create the document.';
+      }
+    });*/
+
+    if (!this.selectedFile) {
+      this.errorMessage = 'Please select a file to upload.';
+      return;
+    }
+
+    this.DocumentService.createDocumentWithFile(
+      this.newDocument.title,
+      this.inferredFormat,
+      this.selectedFile
+    ).subscribe({
+      next: createdDocument => {
+        this.message = 'Document created successfully!';
+        this.DocumentService.list.push(createdDocument);
+        this.resetForm();
       },
       error: err => {
         console.error('Error creating document:', err);
@@ -173,7 +211,7 @@ export class DocumentDetailsComponent implements OnInit {
   }
 
   convertDocument(document: Document): void {
-    // Conversion will be implemented in a later sprint.
+    //Conversion wird in einem anderem Sprint implementiert
     this.message =
       `Document conversion for "${document.title}" is not available yet.`;
     this.errorMessage = '';
@@ -193,5 +231,8 @@ export class DocumentDetailsComponent implements OnInit {
       title: '',
       format: ''
     };
+
+    this.selectedFile = null;
+    this.inferredFormat = '';
   }
 }

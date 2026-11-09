@@ -44,6 +44,17 @@ export class DocumentServiceService {
     });
   }
 
+  createDocumentWithFile(title: string, format: string, file: File): Observable<Document> {
+      console.log('Creating document with file:', title, format, file.name);
+
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('format', format);
+      formData.append('file', file, file.name);
+
+      return this.http.post<Document>(this.url, formData);
+  }
+
   createDocument(document: Document): Observable<Document> {
     console.log('Creating document:', document);
 

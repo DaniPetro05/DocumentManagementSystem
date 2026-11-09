@@ -13,7 +13,6 @@
   <h2>Dashboard</h2>
 
   <section class="create-document">
-    <!--<h3>Create Document</h3>-->
     <h3>{{ editingDocumentId !== null ? 'Edit Document' : 'Create Document' }}</h3>
 
     <form (ngSubmit)="createDocument()">
@@ -29,45 +28,25 @@
         required
       />
 
-      <!--<label for="format">Format</label>
-
-      <input
-        id="format"
-        name="format"
-        type="text"
-        [(ngModel)]="newDocument.format"
-        placeholder="e.g. PDF, TXT, DOCX"
-      />-->
-
       @if (editingDocumentId === null) {
-        <label for="format">Format</label>
-
-        <input
-          id="format"
-          name="format"
-          type="text"
-          [(ngModel)]="newDocument.format"
-          placeholder="e.g. PDF, TXT, DOCX"
-          required
-        />
-
-        <label for="file">Document upload (Sprint 4)</label>
+        <label for="file">Document upload</label>
 
         <input
           id="file"
           name="file"
           type="file"
-          disabled
+          (change)="onFileSelected($event)"
+          accept=".pdf,.txt,.docx,.png,.jpg,.jpeg"
+          required
         />
 
-        <p class="hint">
-          File uploads will be enabled when storage integration is implemented.
-        </p>
+        @if (selectedFile) {
+          <p class="hint">
+            Selected: {{ selectedFile.name }} ({{ inferredFormat }})
+          </p>
+        }
       }
 
-      <!--<button type="submit">
-        Create Document
-      </button>-->
       <button type="submit">
         {{ editingDocumentId !== null ? 'Save Changes' : 'Create Document' }}
       </button>
@@ -90,17 +69,12 @@
 
   </section>
 
-
   <section class="documents">
-
     <h3>Documents</h3>
 
     @if (DocumentService.isResolved) {
-
       @if (DocumentService.list.length > 0) {
-
         <table>
-
           <thead>
             <tr>
               <th>ID</th>
@@ -109,57 +83,27 @@
               <th>Actions</th>
             </tr>
           </thead>
-
           <tbody>
-
             @for (doc of DocumentService.list; track doc.id) {
-
               <tr>
                 <td>{{ doc.id }}</td>
                 <td>{{ doc.title }}</td>
                 <td>{{ doc.format }}</td>
                 <td class="actions">
-                  <button
-                    type="button"
-                    (click)="editDocument(doc)"
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    type="button"
-                    (click)="deleteDocument(doc)"
-                  >
-                    Delete
-                  </button>
-
-                  <button
-                    type="button"
-                    (click)="convertDocument(doc)"
-                  >
-                    Convert
-                  </button>
+                  <button type="button" (click)="editDocument(doc)">Edit</button>
+                  <button type="button" (click)="deleteDocument(doc)">Delete</button>
+                  <button type="button" (click)="convertDocument(doc)">Convert</button>
                 </td>
               </tr>
-
             }
-
           </tbody>
-
         </table>
-
       } @else {
-
         <p>No documents found.</p>
-
       }
-
     } @else {
-
       <p>Loading documents...</p>
-
     }
-
   </section>
 
 </div>

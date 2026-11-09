@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DocumentManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261020105745_Initial")]
-    partial class Initial
+    [Migration("20261108231132_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,10 @@ namespace DocumentManagementSystem.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Format")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MinioObjectPath")
                         .IsRequired()
                         .HasColumnType("text");
 
